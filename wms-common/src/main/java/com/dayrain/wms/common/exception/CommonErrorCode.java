@@ -5,7 +5,10 @@ package com.dayrain.wms.common.exception;
  * @date 2024/3/3
  */
 public enum CommonErrorCode implements ErrorCode{
-    HTTP_PARAM_ERROR(4001, "HTTP参数校验异常")
+
+    UNKNOWN_ERROR(4000, "未知异常"),
+
+    HTTP_PARAM_ERROR(4001, "HTTP参数校验异常"),
     ;
 
     private final int code;
