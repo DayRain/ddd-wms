@@ -10,6 +10,7 @@
         <module>wms-domain</module>
         <module>wms-api</module>
         <module>wms-common</module>
+        <module>wms-application</module>
     </modules>
     <name>ddd-wms</name>
     <description>ddd-wms</description>

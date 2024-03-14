@@ -1,8 +1,5 @@
-package com.dayrain.wms.domain.exception;
+package com.dayrain.wms.common.exception;
 
-
-import com.dayrain.wms.common.exception.ErrorCode;
-import com.dayrain.wms.common.exception.ServerException;
 
 public class DomainException extends ServerException {
 
