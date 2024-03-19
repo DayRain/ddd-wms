@@ -3,6 +3,7 @@ package com.dayrain.wms.common.exception;
 import com.dayrain.wms.common.exception.ErrorCode;
 
 public enum DomainErrorCode implements ErrorCode {
+
     STOCK_ERROR(5000, "库存异常")
     ;
     private final int code;

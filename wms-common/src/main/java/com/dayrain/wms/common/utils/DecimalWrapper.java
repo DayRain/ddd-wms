@@ -10,8 +10,8 @@ public class DecimalWrapper {
         this.current = current;
     }
 
-    public boolean eq(BigDecimal other) {
-        return current.equals(other);
+    public boolean eqIgnoreScale(BigDecimal other) {
+        return current.compareTo(other) == 0;
     }
 
     public boolean gt(BigDecimal other) {
@@ -28,5 +28,13 @@ public class DecimalWrapper {
 
     public boolean lte(BigDecimal other) {
         return current.compareTo(other) <= 0;
+    }
+
+    public boolean isPositive() {
+        return current.compareTo(BigDecimal.ZERO) > 0;
+    }
+
+    public boolean isNegative() {
+        return current.compareTo(BigDecimal.ZERO) < 0;
     }
 }

@@ -26,5 +26,4 @@ public class StockInCommand {
     private BigDecimal weight;
 
     private BigDecimal price;
-
 }
