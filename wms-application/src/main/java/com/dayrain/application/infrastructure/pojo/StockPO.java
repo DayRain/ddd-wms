@@ -1,5 +1,7 @@
 package com.dayrain.application.infrastructure.pojo;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.dayrain.wms.domain.stock.StockAttribute;
 import lombok.Data;
@@ -27,7 +29,11 @@ public class StockPO extends StockAttribute{
 
     private String binId;
 
+    private String sn;
+
+    @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
-    private String sn;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime updateTime;
 }

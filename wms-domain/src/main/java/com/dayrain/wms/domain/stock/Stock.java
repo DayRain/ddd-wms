@@ -40,6 +40,8 @@ public class Stock {
 
     private LocalDateTime createTime;
 
+    private LocalDateTime updateTime;
+
     private StockAttribute stockAttribute;
 
     private Sn sn;

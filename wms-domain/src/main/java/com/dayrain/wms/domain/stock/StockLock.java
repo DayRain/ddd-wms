@@ -1,5 +1,8 @@
 package com.dayrain.wms.domain.stock;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.dayrain.wms.common.utils.StringUtils;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +17,7 @@ import java.util.Objects;
 @Builder
 public class StockLock {
 
+    @TableId
     private String id;
 
     private String stockId;
@@ -22,19 +26,20 @@ public class StockLock {
 
     private String orderCode;
 
-    private LocalDateTime lockTime;
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
 
     private String lockedBy;
 
     private LockReason lockReason;
 
     public StockLock(String id, String stockId, BigDecimal lockNumber, String orderCode
-            , LocalDateTime lockTime, String lockedBy, LockReason lockReason) {
+            , LocalDateTime createTime, String lockedBy, LockReason lockReason) {
         this.id = id;
         this.stockId = stockId;
         this.lockNumber = lockNumber;
         this.orderCode = orderCode;
-        this.lockTime = lockTime;
+        this.createTime = createTime;
         this.lockedBy = lockedBy;
         this.lockReason = lockReason;
     }
