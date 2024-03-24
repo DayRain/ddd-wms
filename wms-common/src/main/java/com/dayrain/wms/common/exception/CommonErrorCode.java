@@ -7,8 +7,8 @@ package com.dayrain.wms.common.exception;
 public enum CommonErrorCode implements ErrorCode{
 
     UNKNOWN_ERROR(4000, "未知异常"),
-
     HTTP_PARAM_ERROR(4001, "HTTP参数校验异常"),
+    SERIAL_ERROR(4002, "序列化反序列化错误"),
     ;
 
     private final int code;

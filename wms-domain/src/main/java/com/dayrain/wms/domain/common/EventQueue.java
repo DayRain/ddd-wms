@@ -1,4 +1,4 @@
-package com.dayrain.wms.domain.event;
+package com.dayrain.wms.domain.common;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.dayrain.wms.domain.entity;
+package com.dayrain.wms.domain.stock;
 
 public enum StockAttributeUpdateReason {
     MANUAL_UPDATE;

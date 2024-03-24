@@ -1,13 +1,16 @@
-package com.dayrain.wms.domain.event.stock;
+package com.dayrain.wms.domain.stock;
 
-import com.dayrain.wms.domain.entity.StockAttribute;
-import com.dayrain.wms.domain.event.DomainEvent;
+import com.dayrain.wms.domain.common.DomainEvent;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class StockAddedEvent implements DomainEvent {
 

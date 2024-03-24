@@ -1,4 +1,4 @@
-package com.dayrain.wms.domain.event;
+package com.dayrain.wms.domain.common;
 
 public interface DomainEventListener {
     void onEvent(DomainEvent event);

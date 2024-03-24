@@ -1,6 +1,6 @@
 package com.dayrain.wms.domain.command;
 
-import com.dayrain.wms.domain.enums.LockReason;
+import com.dayrain.wms.domain.stock.LockReason;
 import lombok.Data;
 
 import java.math.BigDecimal;

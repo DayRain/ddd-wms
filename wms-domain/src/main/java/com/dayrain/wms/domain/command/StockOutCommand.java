@@ -1,10 +1,16 @@
 package com.dayrain.wms.domain.command;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class StockOutCommand {
 
     private String stockId;
@@ -15,7 +21,19 @@ public class StockOutCommand {
 
     private BigDecimal number;
 
-    private BigDecimal weight;
+    private BigDecimal weight = BigDecimal.ZERO;
 
-    private BigDecimal price;
+    private BigDecimal price = BigDecimal.ZERO;
+
+    public StockOutCommand(String stockId, BigDecimal number) {
+        this.stockId = stockId;
+        this.number = number;
+    }
+
+    public StockOutCommand(String stockId, BigDecimal number, BigDecimal weight, BigDecimal price) {
+        this.stockId = stockId;
+        this.number = number;
+        this.weight = weight;
+        this.price = price;
+    }
 }

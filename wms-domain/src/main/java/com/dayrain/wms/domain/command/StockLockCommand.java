@@ -1,10 +1,14 @@
 package com.dayrain.wms.domain.command;
 
-import com.dayrain.wms.domain.enums.LockReason;
+import com.dayrain.wms.domain.stock.LockReason;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
+@NoArgsConstructor
 @Data
 public class StockLockCommand {
 

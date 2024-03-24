@@ -1,14 +1,17 @@
-package com.dayrain.wms.domain.event.stock;
+package com.dayrain.wms.domain.stock;
 
-import com.dayrain.wms.domain.enums.LockReason;
-import com.dayrain.wms.domain.event.DomainEvent;
+import com.dayrain.wms.domain.common.DomainEvent;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class StockLockEvent implements DomainEvent {
     private String lockId;

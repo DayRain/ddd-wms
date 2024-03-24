@@ -1,4 +1,4 @@
-package com.dayrain.wms.domain.entity;
+package com.dayrain.wms.domain.stock;
 
 import lombok.Data;
 
