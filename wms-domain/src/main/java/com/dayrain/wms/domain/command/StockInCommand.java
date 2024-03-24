@@ -1,5 +1,6 @@
 package com.dayrain.wms.domain.command;
 
+import com.dayrain.wms.domain.stock.StockAddReason;
 import com.dayrain.wms.domain.stock.StockAttribute;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,6 +34,8 @@ public class StockInCommand {
     private BigDecimal price;
 
     private String sn;
+
+    private StockAddReason stockAddReason;
 
     public StockInCommand(String stockId, BigDecimal number, BigDecimal weight, BigDecimal price) {
         this.stockId = stockId;

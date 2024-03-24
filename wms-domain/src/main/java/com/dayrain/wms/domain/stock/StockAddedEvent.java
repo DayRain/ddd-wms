@@ -31,4 +31,6 @@ public class StockAddedEvent implements DomainEvent {
     private BigDecimal addedWeight;
 
     private BigDecimal addedPrice;
+
+    private StockAddReason stockAddReason = StockAddReason.IN;
 }

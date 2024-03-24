@@ -6,18 +6,23 @@ import com.dayrain.wms.common.key.KeyGeneratorFactory;
 import com.dayrain.wms.common.utils.CollectionUtils;
 import com.dayrain.wms.domain.command.*;
 import com.dayrain.wms.domain.common.EventQueue;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static com.dayrain.wms.common.utils.DecimalUtils.is;
 
 @Slf4j
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 public class Stock {
 
@@ -58,27 +63,32 @@ public class Stock {
 
     public void stockIn(EventQueue queue, StockInCommand stockInCommand) {
 
-        BigDecimal number = stockInCommand.getNumber();
-        BigDecimal price = stockInCommand.getPrice();
-        BigDecimal weight = stockInCommand.getWeight();
+        BigDecimal addedNumber = stockInCommand.getNumber();
+        BigDecimal addedPrice = stockInCommand.getPrice();
+        BigDecimal addedWeight = stockInCommand.getWeight();
+
+        BigDecimal formNumber = number;
+        BigDecimal fromPrice = price;
+        BigDecimal fromWeight = weight;
 
         addNumber(number);
         addPrice(price);
         addWeight(weight);
 
-        StockMinusEvent stockMinusEvent = StockMinusEvent.builder()
+        StockAddedEvent stockAddedEvent = StockAddedEvent.builder()
                 .stockId(id)
-                .sku(sku)
+                .sku(stockInCommand.getSku())
                 .stockAttribute(stockAttribute)
-                .fromNumber(number)
-                .binId(binId)
-                .fromPrice(price)
-                .fromWeight(weight)
-                .minusNumber(number)
-                .minusPrice(price)
-                .minusWeight(weight)
+                .fromNumber(formNumber)
+                .fromPrice(fromPrice)
+                .fromWeight(fromWeight)
+                .addedNumber(addedNumber)
+                .addedPrice(addedPrice)
+                .addedWeight(addedWeight)
+                .stockAddReason(stockInCommand.getStockAddReason())
                 .build();
-        queue.enqueue(stockMinusEvent);
+
+        queue.enqueue(stockAddedEvent);
     }
 
     public void stockOut(EventQueue queue, StockOutCommand stockOutCommand) {
@@ -86,26 +96,28 @@ public class Stock {
         BigDecimal outPrice = stockOutCommand.getPrice();
         BigDecimal outWeight = stockOutCommand.getWeight();
 
-        BigDecimal formNumber = stockOutCommand.getNumber();
-        BigDecimal fromPrice = stockOutCommand.getPrice();
-        BigDecimal fromWeight = stockOutCommand.getWeight();
+        BigDecimal formNumber = number;
+        BigDecimal fromPrice = price;
+        BigDecimal fromWeight = weight;
 
         minusNumber(outNumber);
         minusPrice(outPrice);
         minusWeight(outWeight);
 
-        StockAddedEvent stockAddedEvent = StockAddedEvent.builder()
+        StockMinusEvent stockMinusEvent = StockMinusEvent.builder()
                 .stockId(id)
-                .sku(stockOutCommand.getSku())
+                .sku(sku)
                 .stockAttribute(stockAttribute)
                 .fromNumber(formNumber)
+                .binId(binId)
                 .fromPrice(fromPrice)
                 .fromWeight(fromWeight)
-                .addedNumber(outNumber)
-                .addedPrice(outPrice)
-                .addedWeight(outWeight)
+                .minusNumber(outNumber)
+                .minusPrice(outPrice)
+                .minusWeight(outWeight)
+                .stockMinusReason(stockOutCommand.getStockMinusReason())
                 .build();
-        queue.enqueue(stockAddedEvent);
+        queue.enqueue(stockMinusEvent);
     }
 
     public boolean tryLock(EventQueue queue, StockLockCommand stockLockCommand) {
@@ -170,7 +182,7 @@ public class Stock {
 
     public void attributeUpdate(EventQueue queue, StockAttributeUpdateCommand attributeUpdateCommand) {
         StockAttribute fromAttribute = this.stockAttribute;
-        this.stockAttribute = attributeUpdateCommand.getStockAttribute();
+        this.stockAttribute = attributeUpdateCommand.getToAttribute();
 
         StockAttributeUpdateEvent attributeUpdateEvent = StockAttributeUpdateEvent.builder()
                 .stockId(id)
@@ -180,6 +192,10 @@ public class Stock {
                 .number(number)
                 .build();
         queue.enqueue(attributeUpdateEvent);
+    }
+
+    public BigDecimal getValidNumber() {
+        return number.subtract(getLockedNumber());
     }
 
     private void addNumber(BigDecimal addedNumber) {

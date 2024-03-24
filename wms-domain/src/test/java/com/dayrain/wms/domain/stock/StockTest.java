@@ -6,10 +6,8 @@ import com.dayrain.wms.domain.command.*;
 import com.dayrain.wms.domain.common.EventQueue;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 
 class StockTest {
 
@@ -205,7 +203,7 @@ class StockTest {
         StockAttributeUpdateCommand stockAttributeUpdateCommand = new StockAttributeUpdateCommand();
         StockAttribute stockAttribute = new StockAttribute();
         stockAttribute.setProductBatch("P001");
-        stockAttributeUpdateCommand.setStockAttribute(stockAttribute);
+        stockAttributeUpdateCommand.setToAttribute(stockAttribute);
 
         stock.attributeUpdate(eventQueue, stockAttributeUpdateCommand);
         Assertions.assertEquals(stockAttribute.getProductBatch(), "P001");

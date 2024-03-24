@@ -2,5 +2,7 @@ package com.dayrain.wms.domain.stock;
 
 public interface StockRepository {
 
-    void save(Stock stock);
+    void saveOrUpdate(Stock stock);
+
+    Stock findById(String id);
 }

@@ -32,4 +32,6 @@ public class StockMinusEvent implements DomainEvent {
     private BigDecimal minusWeight;
 
     private BigDecimal minusPrice;
+
+    private StockMinusReason stockMinusReason;
 }
